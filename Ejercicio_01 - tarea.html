@@ -1,0 +1,100 @@
+<!--EJERCICIO 1:
+Tomar la figura anterior y trazarla en el canvas, definiendo variables de nombres adecuados
+para cada una de ellas y para los colores utilizados. Aplicar el uso de arreglos para
+almacenar los mismos
+
+Ejemplo:
+verde=''
+color=''
+-->
+<canvas id='tablero' width=556 height=379></canvas>
+<script>
+	/*el efecto de recorte hace que todo lo que esté de ahí en adelante quede 
+	delimitado por el recorte usado. Esto hasta que haya otro recorte.*/
+	function recorte(arr){
+		ctx.beginPath();
+		ctx.moveTo(arr[0],arr[1]);
+		for (var i = 2; i <arr.length; i+=2)
+			ctx.lineTo(arr[i], arr[i+1]);
+		ctx.clip();//para recortar
+	}
+<!--function recorteCirculo(arr){
+  	//ctx.beginPath();
+		//ctx.moveTo(arr[0],arr[1]);
+		//for (var i = 2; i <arr.length; i+=2)
+			//ctx.lineTo(arr[i], arr[i+1]);
+     //ctx.arc(cd[0],cd[1],radius, 0, 2*Math.PI);
+		//ctx.clip();//para recortar
+	//} 
+  
+	function rectangulo(cd,colorBorde, colorRelleno, grosor){
+	ctx.beginPath();
+	ctx.strokeStyle = colorBorde;
+	ctx.fillStyle = colorRelleno;
+	ctx.lineWidth = grosor;
+	ctx.moveTo(cd[0],cd[1]);
+	ctx.lineTo(cd[2],cd[3]);
+	ctx.lineTo(cd[4],cd[5]);
+  ctx.lineTo(cd[6],cd[7]);
+	ctx.closePath();
+	ctx.stroke();
+	ctx.fill();
+	}
+
+	function pentagono(cd,colorBorde, colorRelleno, grosor){
+	ctx.beginPath();
+	ctx.strokeStyle = colorBorde;
+	ctx.fillStyle = colorRelleno;
+	ctx.lineWidth = grosor;
+	ctx.moveTo(cd[0],cd[1]);
+	ctx.lineTo(cd[2],cd[3]);
+	ctx.lineTo(cd[4],cd[5]);
+	ctx.lineTo(cd[6],cd[7]);
+	ctx.lineTo(cd[8],cd[9]);
+	ctx.closePath();
+	ctx.stroke();
+	ctx.fill();
+	}
+  function circulo(cd, radius, colorBorde, colorRelleno, grosor){
+    ctx.beginPath();
+    ctx.strokeStyle = colorBorde;
+    ctx.fillStyle = colorRelleno;
+    ctx.lineWidth = grosor;
+    ctx.arc(cd[0],cd[1],radius, 0, 2*Math.PI);
+    ctx.closePath();
+	  ctx.stroke();
+	  ctx.fill();
+  }
+	var c = document.getElementById('tablero')
+	var ctx = c.getContext('2d')
+	
+	//Variable arreglo de colores predefinidos
+	var [azul, verde, rojo, blanco] = ['rgba(0,162,232)', 'rgba(181,230,29)', 'rgba(237,28,36)', 'rgba(255,255,255)'];
+
+	//Variables de arreglos ubicación figuras predefinidas
+	var pentaAzul=[344,3, 540,142, 465,370, 224,370, 150,142], pentaBlanco=[305,68, 424,157, 380,303, 226,303, 183,157];
+	var rectVerde=[13,143, 544,237, 544,288, 4,191];
+	var circRojo=[168, 162], circBlanco=[193,162];
+  //var tamanioOriginal=[0,0, 556,0, 556,379, 0,379];
+//Variables de arreglos de la ubicación de las figuras
+  //var [pentaAzul, rectVerde, circRojo] =
+  
+  rectangulo(rectVerde,verde, verde);//Rectangulo verde
+  circulo(circRojo, 135, rojo, rojo);//Circulo rojo
+  circulo(circBlanco, 89, blanco, blanco);//Circulo blanco
+  pentagono(pentaAzul, azul, azul);
+  pentagono(pentaBlanco, blanco, blanco);
+  
+  //Para mejor manejo de los recortes, se manipula de áreas mayores a menores:
+  recorte(pentaAzul);
+  rectangulo(rectVerde,verde, verde);//Rectangulo verde
+  
+  recorte(pentaBlanco);
+  rectangulo(rectVerde,verde, verde);//Rectangulo verde
+  circulo(circRojo, 135, rojo, rojo);//Circulo rojo
+  circulo(circBlanco, 89, blanco, blanco);//Circulo blanco
+  //recorteCirculo(tamanioOriginal);
+  //recorteCirculo(circBlanco);
+  //rectangulo(rectVerde,verde, verde);//Rectangulo verde
+  
+</script>
